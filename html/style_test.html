@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style media="screen">
+        *{margin: 0; padding: 0;}
+        div{width: 100vw; height: 100vh;}
+        #window1{background-color: black}
+        #window2{background-color: white}
+        #window3{background-color: black}
+        #window4{background-color: white}
+    </style>
+</head>
+<body>
+    <section>
+        <div id="window1">
+            <span>TEST</span>
+            <span>TEST</span>
+            <span>TEST</span>
+            <span>TEST</span>
+        </div>
+        <div id="window2">2</div>
+        <div id="window3">3</div>
+        <div id="window4">4</div>
+    </section>
+</body>
+</html>
+<script>
+    var scrollEvent = false;
+    var count = 0;
+
+    $("html,body").on('mousewheel', function (c){
+        c.preventDefault();
+        var m = c.originalEvent.wheelDelta;
+        var sb = $("#window1").height();
+
+        if(m > 1 && scrollEvent == false && count >= 1){
+            console.log(count);
+            scrollEvent = true;
+            count--;
+            $("html,body").stop().animate({scrollTop:sb*count}),
+                {duration:300 , complete: function () {
+                    scrollEvent = false;}}
+        }
+        else if(m < 1 && scrollEvent == false && count < 1){
+            console.log(count);
+            scrollEvent = true;
+            count++;
+            $("html,body").stop().animate({scrollTop:sb*count}),
+                {duration:300 , complete: function () {
+                        scrollEvent = false;}}
+        }
+    });
+</script>
